@@ -1,0 +1,8 @@
+
+*.xml
+.vscode/
+aws_google_saml.egg-info/
+dist/
+__pycache__/
+.DS_Store
+aws-google-saml.rb

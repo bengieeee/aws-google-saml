@@ -1,0 +1,29 @@
+name: Python Package & Deploy to PyPI
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-to-pypi:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Install dependencies
+      run: |
+        pip install twine
+    - name: Bump Version
+      run: |
+        sed -i "s/0.0.0/$(date +"%Y.%m%d.${{github.run_number}}")/g" setup.py
+    - name: Create Python Package
+      run: |
+        python3 setup.py sdist
+    - name: Upload to Twine
+      run: |
+        twine upload dist/*
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
