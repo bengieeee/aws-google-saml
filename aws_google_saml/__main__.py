@@ -318,7 +318,11 @@ def main():
     
     Thread(target=start_server, args=(options,)).start()
 
-    webbrowser.open(f"https://accounts.google.com/o/saml2/initsso?idpid={options.google_idp_id}&spid={options.google_sp_id}&forceauthn=false")
+    url = f"https://accounts.google.com/o/saml2/initsso?idpid={options.google_idp_id}&spid={options.google_sp_id}&forceauthn=false"
+    if os.environ.get('RUNTIME', 'LOCAL') == 'DOCKER':
+        print(f"Open the following URL: {url}")
+    else:
+        webbrowser.open(url)
 
     # That's it. Now we wait for the HTTP callback
 
