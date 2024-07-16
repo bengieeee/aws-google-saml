@@ -2,8 +2,6 @@
 
 rm -rf dist
 
-python3 -m pip install setuptools
-
 python3 setup.py sdist
 
 twine upload dist/*
