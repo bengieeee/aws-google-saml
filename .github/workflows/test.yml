@@ -4,7 +4,7 @@ on:
     branches-ignore:
       - main
 jobs:
-  deploy-to-pypi:
+  deploy-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
